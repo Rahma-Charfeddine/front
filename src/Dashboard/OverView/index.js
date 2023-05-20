@@ -1,5 +1,4 @@
 import React from "react";
-import Table from "./table";
 
 function OverView() {
     return (
@@ -50,7 +49,6 @@ function OverView() {
 
             </div>
             <div className="container m-4">
-                <Table />
             </div>
         </React.Fragment>
     )

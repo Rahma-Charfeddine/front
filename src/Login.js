@@ -2,16 +2,16 @@ import { useState } from "react";
 
 function Login() {
 
-    const [matricule, setMatricule] = useState('');
+    const [registartion_number, setRegistartionNumber] = useState('');
     const [password, setPassword] = useState('');
     return (
         <div className="container p-5 m-5 d-flex justify-content-center align-items-center">
             <form className="w-50">
                 <div className="">
                     <label htmlFor="Registration number" className="form-label">Registration number:</label>
-                    <input type="text" className="form-control" id="matricule"
-                        defaultValue={matricule}
-                        onChange={e => { setMatricule(e.target.value) }}
+                    <input type="text" className="form-control" id="Registartion number "
+                        defaultValue={registartion_number}
+                        onChange={e => { setRegistartionNumber(e.target.value) }}
                     />
                     <div className="invalid-feedback">Registration number is required.</div>
                 </div>

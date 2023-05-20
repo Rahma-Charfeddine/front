@@ -3,7 +3,7 @@ import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import SideBar from "./SideBar";
 import Header from "./Header";
 import OverView from "./OverView";
-
+import Data from "./Data";
 
 
 function Dashboard() {
@@ -17,7 +17,7 @@ function Dashboard() {
                 <Header setToggled={setToggled} />
                 <Routes>
                     <Route path="/" element={<OverView />} />
-                    <Route path="/data" element={<div>data component to do</div>} />
+                    <Route path="/data/*" element={<Data/>} />
                     <Route path="/tasks" element={<div>tasks component to do</div>} />
                     <Route path="/settings" element={<div>settings component to do</div>} />
                     <Route path="/users" element={<div>users component to do</div>} />
