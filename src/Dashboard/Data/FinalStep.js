@@ -1,27 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Select from 'react-select'
 
 import Table from "./table";
+import instance from "../../axiosInstance";
+import { useParams } from "react-router-dom";
 
 function FinalStep(params) {
 
-    const processes = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' }
-    ]
+    const { idsub, idprocess, idelement } = useParams();
 
-    const sub_processes = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' }
-    ]
+    const [processes, setProcesses] = useState([]);
+    const [subprocesses, setSubprocesses] = useState([]);
+    const [elements, setElement] = useState([]);
+    const [indicators, setIndicators] = useState([]);
 
-    const elements = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' }
-    ]
+    useEffect(() => {
+        instance.get('process').then(response => {
+            setProcesses(response.data.data.map(el => ({ value: el._id, label: el.process_name })))
+        })
+        instance.get('subprocess/getallbyidprocess/' + idprocess).then(response => {
+            setSubprocesses(response.data.data.map(el => ({ value: el._id, label: el.subprocess_name })))
+            console.log(response.data.data)
+        })
+        instance.get('element/getallbyidsub/' + idsub).then(response => {
+            setElement(response.data.data.map(el => ({ value: el._id, label: el.element_name })))
+            console.log(response.data.data)
+        })
+        instance.get('indicator/getallbyidelement/' + idelement).then(response => {
+            setIndicators(response.data.data)
+            console.log(response.data.data)
+        })
+
+    }, [idprocess, idsub, idelement])
+
     return (
         <React.Fragment>
             <hr />
@@ -30,15 +41,24 @@ function FinalStep(params) {
                     <div className="col-md-4 d-flex justify-content-center align-items-center">
                         <i class="bi bi-terminal me-2"></i>
                         <span>Processes :</span>
-                        <Select className="w-50 px-2" options={processes} />
+                        <Select className="w-50 px-2" options={processes} value={
+                            processes.filter(option =>
+                                option.value === idprocess)
+                        } />
                     </div>
                     <div className="col-md-4 d-flex justify-content-center align-items-center">
                         <span>Sub-Processes :</span>
-                        <Select className="w-50 px-2" options={sub_processes} />
+                        <Select className="w-50 px-2" options={subprocesses} value={
+                            subprocesses.filter(option =>
+                                option.value === idsub)
+                        } />
                     </div>
                     <div className="col-md-4 d-flex justify-content-center align-items-center">
                         <span>Elements :</span>
-                        <Select className="w-50 px-2" options={elements} />
+                        <Select className="w-50 px-2" options={elements} value={
+                            elements.filter(option =>
+                                option.value === idelement)
+                        } />
                     </div>
                 </div>
             </div>
