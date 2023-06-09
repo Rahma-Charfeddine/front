@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import instance from "../../axiosInstance";
+import axios from 'axios';
 
 function EditUser() {
 
@@ -14,10 +15,28 @@ function EditUser() {
         })
     }, [id])
 
-    // function ( call put request )
-    function savechanges(e) {
-        e.preventDefault();
+    
         // 
+        const saveChanges = async (userId, updatedUserInfo) => {
+            try {
+           
+              const response = await axios.put(`${userId}`, updatedUserInfo);
+              console.log(response.data); 
+          
+            } catch (error) {
+              
+            }
+          };
+
+          function savechanges(e) {
+            e.preventDefault();
+            
+
+
+
+
+
+
     }
 
     return (
