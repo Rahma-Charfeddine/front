@@ -15,26 +15,21 @@ function EditUser() {
         })
     }, [id])
 
-    
-        // 
-        const saveChanges = async (userId, updatedUserInfo) => {
-            try {
-           
-              const response = await axios.put(`${userId}`, updatedUserInfo);
-              console.log(response.data); 
-          
-            } catch (error) {
-              
-            }
-          };
 
-          function savechanges(e) {
-            e.preventDefault();
-            
+    // 
+    const saveChanges = async (userId, updatedUserInfo) => {
+        try {
 
+            const response = await axios.put(`${userId}`, updatedUserInfo);
+            console.log(response.data);
 
+        } catch (error) {
 
+        }
+    };
 
+    function savechanges(e) {
+        e.preventDefault();
 
 
     }
@@ -75,7 +70,7 @@ function EditUser() {
                                 Valid Tel number is required.
                             </div>
                         </div>
- 
+
 
                         <div class="col-sm-6">
                             <label for="lastName" class="form-label">Family name</label>
@@ -87,48 +82,62 @@ function EditUser() {
 
                         <div class="col-12">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="you@example.com" defaultValue={user?.email} required=""  />
+                            <input type="email" class="form-control" id="email" placeholder="you@example.com" defaultValue={user?.email} required="" />
                             <div class="invalid-feedback">
                                 Please enter a valid email address.
                             </div>
                         </div>
-                       
 
-                       
+
+
+                        <div class="col-12">
+                            <label for="date" class="form-label">Date of Birth</label>
+                            <input type="date" class="form-control" id="date" defaultValue={user?.dateOfBirth.substring(0, 10)} required="true" />
+                            <div class="invalid-feedback">
+                                Please enter a valid email address.
+                            </div>
+                        </div>
+
+
+
                         <div class="my-3">
-                        <h9 class="mb-3">Gender</h9>
-                        <div class="form-check">
-                             <input type="checkbox" class="form-check-input" id="same-address"/>
-                            <label class="form-check-label" for="same-address">male</label>
-                             </div>
-                             <div class="form-check">
-                             <input type="checkbox" class="form-check-input" id="same-address"/>
-                            <label class="form-check-label" for="same-address">female</label>
-                             </div>
-                             </div>
+                            <h9 class="mb-3">Gender</h9>
 
 
-                             
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="gender" onClick={(e) => { setUser(previous => { return ({ ...previous, gender: 'male' }) }) }} />
+                                <label class="form-check-label" for="same-address">male</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="gender" onClick={(e) => { setUser(previous => { return ({ ...previous, gender: 'female' }) }) }} />
+
+                                <label class="form-check-label" for="same-address">female</label>
+                            </div>
+                        </div>
+
+
+
                         <div class="my-3">
-                        <h6 class="mb-3">Role</h6>
-                       
-                        <div class="form-check">
-                        <input id="credit" name="role" type="radio" class="form-check-input" required=""/>
-                        <label class="form-check-label" for="credit">Board Member</label>
+                            <h6 class="mb-3">Role</h6>
+
+                            <div class="form-check">
+                                <input id="credit" name="role" type="radio" class="form-check-input" required="" />
+                                <label class="form-check-label" for="credit">Board Member</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input id="debit" name="role" type="radio" class="form-check-input" required="" />
+                                <label class="form-check-label" for="debit">Dep manager</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input id="paypal" name="role" type="radio" class="form-check-input" required="" />
+                                <label class="form-check-label" for="paypal">Admin</label>
+
+                            </div>
                         </div>
 
-                        <div class="form-check">
-                        <input id="debit" name="role" type="radio" class="form-check-input" required=""/>
-                        <label class="form-check-label" for="debit">Dep manager</label>
-                        </div>
-
-                        <div class="form-check">
-                        <input id="paypal" name="role" type="radio" class="form-check-input" required=""/>
-                        <label class="form-check-label" for="paypal">Admin</label>
-                        
-                        </div>
-                        </div>
-                            
                         {/* // checkboxes ..  for roles  // react select forthe gender selction // input datte of birth  */}
 
                         <button class="w-100 btn btn-outline-primary btn-lg" type="submit">Save Changes</button>
