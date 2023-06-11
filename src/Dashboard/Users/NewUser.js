@@ -1,37 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import instance from "../../axiosInstance";
 
-function EditUser() {
+function NewUser() {
+
+    const navigate = useNavigate();
 
     const { id } = useParams();
 
-    const [user, setUser] = useState();
-
-    useEffect(() => {
-        instance.get('user/' + id).then(resp => {
-            setUser(resp.data)
-        })
-    }, [id])
-
+    const [user, setUser] = useState({});
 
     function savechanges(e) {
         e.preventDefault()
         console.log(user)
-        instance.put('user/' + user._id, user)
+        instance.post('user', user)
             .then(response => {
                 alert("changed correctli :) done");
+                navigate("/dashboard/users");
             })
             .catch(err => {
                 console.log(err);
+                alert("something went wrong");
             })
     }
 
     return (
         <React.Fragment>
             <div className="container-fluid text-center pt-4">
-                <h3>Edit User</h3>
-                <h5>" {user?._id} "</h5>
+                <h3>Create New User</h3>
             </div>
             <div className="p-5 m-5">
                 <form className="needs-validation" noValidate="" onSubmit={savechanges}>
@@ -75,7 +71,7 @@ function EditUser() {
                                         nTel: e.target.value
                                     })
                                 })
-                            }}/>
+                            }} />
                             <div className="invalid-feedback">
                                 Valid Tel number is required.
                             </div>
@@ -89,7 +85,22 @@ function EditUser() {
                                         email: e.target.value
                                     })
                                 })
-                            }}/>
+                            }} />
+                            <div className="invalid-feedback">
+                                Please enter a valid email address.
+                            </div>
+                        </div>
+
+                        <div className="col-12">
+                            <label htmlFor="password" className="form-label">Password</label>
+                            <input type="password" className="form-control" id="password" placeholder="you@example.com" defaultValue={user?.password} required={true} onChange={(e) => {
+                                setUser(prev => {
+                                    return ({
+                                        ...prev,
+                                        password: e.target.value
+                                    })
+                                })
+                            }} />
                             <div className="invalid-feedback">
                                 Please enter a valid email address.
                             </div>
@@ -106,9 +117,11 @@ function EditUser() {
                                 })
                             }} />
                             <div className="invalid-feedback">
-                                Please enter a valid email address.
+                                Please enter a valid Date of birth.
                             </div>
                         </div>
+
+                        
 
                         <div className="my-3">
                             <h5 className="mb-3">Gender</h5>
@@ -122,7 +135,6 @@ function EditUser() {
                                 <label className="form-check-label" htmlFor="female">Female</label>
                             </div>
                         </div>
-                        
 
                         <div className="col-6">
                             <label htmlFor="date" className="form-label">Registartion Number</label>
@@ -182,11 +194,11 @@ function EditUser() {
 
                         {/* // checkboxes ..  for roles  // react select forthe gender selction // input datte of birth  */}
 
-                        <button className="w-100 btn btn-outline-primary btn-lg" type="submit">Save Changes</button>
+                        <button className="w-100 btn btn-outline-primary btn-lg" type="submit">Add New User</button>
                     </div>
                 </form>
             </div>
         </React.Fragment>
     )
 }
-export default EditUser;
+export default NewUser;

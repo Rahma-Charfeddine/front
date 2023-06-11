@@ -5,6 +5,7 @@ import Header from "./Header";
 import OverView from "./OverView";
 import Data from "./Data";
 import Users from "./Users";
+import Settings from "./Settings";
 
 
 function Dashboard() {
@@ -23,7 +24,7 @@ function Dashboard() {
                     <Route path="/data/*" element={<Data/>} />
                     <Route path="/tasks" element={<div>tasks component to do // department manager</div>} />
                     <Route path="/allmissions" element={<div>tasks component to do // admin</div>} />
-                    <Route path="/settings" element={<div>settings component to do // admin</div>} /> 
+                    <Route path="/settings" Component={Settings} /> 
                     <Route path="/users/*" element={<Users />} />
                    <Route path="/MGevaluation" element={<div>evaluation component to do // department manager redaction du rapport</div>} />
                 </Routes>

@@ -11,7 +11,6 @@ function ElementSelection(params) {
 
     const [elements, setElement] = useState([]);
 
-
     useEffect(() => {
 
         //calling process api to get all processes from backend 
@@ -21,8 +20,8 @@ function ElementSelection(params) {
                 console.log(response.data.data)
             })
             .catch(error => { console.log(error.message) })
-    }, [])
-    
+    }, [idsub])
+
     return (
         <React.Fragment>
             <div className="conatiner p-5 m-5 d-flex justify-content-center align-items-center">

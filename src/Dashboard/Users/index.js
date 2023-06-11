@@ -1,7 +1,8 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import {  Route, Routes } from "react-router-dom";
 import Table from "./table";
 import EditUser from "./EditUser";
+import NewUser from "./NewUser";
 
 function Users() {
 
@@ -9,10 +10,15 @@ function Users() {
 
     return (
         <React.Fragment>
-            <Routes>
-                <Route path="/edit/:id" element={<EditUser />} />
-                <Route path="/" element={<Table />} />
-            </Routes>
+            <div className="container">
+                
+                <Routes>
+                    <Route path="/" element={<Table />} />
+                    <Route path="/edit/:id" element={<EditUser />} />
+                    <Route path="/new" element={<NewUser />} />
+                </Routes>
+            </div>
+
         </React.Fragment>
     )
 }

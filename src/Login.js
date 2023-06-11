@@ -19,11 +19,9 @@ function Login() {
             registartion_number: registartion_number,
             password: password
         }).then(async (response) => {
-            if (response.status === 200) {
-                const userd = response.data.user;
-                localStorage.setItem('user', JSON.stringify(userd))
-                navigate('/dashboard')
-            }
+            const userd = response.data.user;
+            localStorage.setItem('user', JSON.stringify(userd))
+            navigate('/dashboard')
         }).catch(error => {
             console.log(error.message)
             setIs_Loading(false)
@@ -32,7 +30,7 @@ function Login() {
         })
     }
     return (
-        <div className="container p-5 m-5 d-flex justify-content-center align-items-center">
+        <div className="container d-flex justify-content-center align-items-center h-100">
             {
                 is_Loading && (
                     <div class="spinner-border text-primary" role="status">
@@ -51,8 +49,8 @@ function Login() {
                             )
                         }
                         <div className="">
-                            <label htmlFor="Registration number" className="form-label">Registration number:</label>
-                            <input type="text" className="form-control" id="Registartion number "
+                            <label htmlFor="registartion_number" className="form-label">Registration number:</label>
+                            <input type="text" className="form-control" id="registartion_number"
                                 defaultValue={registartion_number}
                                 onChange={e => { setRegistartionNumber(e.target.value) }}
                             />
