@@ -44,7 +44,6 @@ function ProcessSelection() {
     return (
         <React.Fragment>
             {(addingSection && (
-
                 <div className="container mt-5">
                     {message.code === 200 && (
                         <div className="container">
@@ -62,10 +61,11 @@ function ProcessSelection() {
                     )}
                     <form onSubmit={onSubmitNewProcess}>
                         <span className="text-primary"><strong>New Process :</strong></span>
-                        <div class="input-group">
-                            <input required type="text" class="form-control" placeholder="Process Name..." aria-label="Process Name..." value={name} onChange={(e) => { setname(e.target.value) }} />
-                            <button class="btn btn-outline-secondary" type="reset">Reset</button>
-                            <button class="btn btn-outline-primary" type="submit">Submit</button>
+                        <div className="input-group">
+                            <input required type="text" className="form-control" placeholder="Process Name..." aria-label="Process Name..." value={name} onChange={(e) => { setname(e.target.value) }} />
+                            <button className="btn btn-outline-danger" type="reset" onClick={() => { setAddingSection(false) }}>Cancel</button>
+                            <button className="btn btn-outline-secondary" type="reset">Reset</button>
+                            <button className="btn btn-outline-primary" type="submit">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -75,11 +75,15 @@ function ProcessSelection() {
                 </div>
 
             }
+            <div className="container d-flex justify-content-start m-5">
+                <h5 className="text-primary"><strong>Process List :</strong></h5>
+            </div>
             <div className="conatiner px-5 m-5 text-center">
                 {
-                    processes.map((process, index) => (
+                    processes.map((process) => (
                         <button
-                            class="btn btn-lg btn-outline-primary w-100 m-3 text-capitalize fw-bolder px-5"
+                            key={process._id}
+                            className="btn btn-lg btn-outline-primary w-100 m-3 text-capitalize fw-bolder px-5"
                             type="button" onClick={() => {
                                 navigate('/dashboard/data/' + process._id)
                             }}>

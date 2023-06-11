@@ -40,7 +40,8 @@ function Login() {
             }
             {
                 !is_Loading && (
-                    <form className="w-50" onSubmit={submitlogin}>
+                    <form onSubmit={submitlogin} className="text-center">
+                        <img class="mb-4" src="/logo.webp" style={{ filter: "invert()", maxWidth: '300px' }} alt="" />
                         {
                             err && (
                                 <div class="alert alert-danger" role="alert">
@@ -48,25 +49,25 @@ function Login() {
                                 </div>
                             )
                         }
-                        <div className="">
-                            <label htmlFor="registartion_number" className="form-label">Registration number:</label>
+                        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+                        <div className="form-floating m-2">
                             <input type="text" className="form-control" id="registartion_number"
                                 defaultValue={registartion_number}
                                 onChange={e => { setRegistartionNumber(e.target.value) }}
                             />
+                            <label htmlFor="registartion_number">Registration number :</label>
                             <div className="invalid-feedback">Registration number is required.</div>
                         </div>
-
-                        <div className="">
-                            <label htmlFor="password" className="form-label">Password:</label>
+                        <div className="form-floating m-2">
                             <input type="password" className="form-control" id="password"
                                 defaultValue={password}
                                 onChange={e => { setPassword(e.target.value) }}
                             />
-                            <div className="invalid-feedback">password required.</div>
+                            <label htmlFor="registartion_number">Password :</label>
                         </div>
-
-                        <button type="submit" className="btn btn-primary btn-block m-4">Sign in</button>
+                        <button class=" btn btn-lg btn-primary m-3" type="submit">Sign in</button>
+                        <p class="mt-5 mb-3 text-muted"> © 2023</p>
                     </form>
                 )
             }

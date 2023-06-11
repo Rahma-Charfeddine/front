@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Select from 'react-select'
 
-import Table from "./table";
 import instance from "../../axiosInstance";
 import { useParams } from "react-router-dom";
 
-function FinalStep(params) {
+function FinalStep() {
 
     const { idsub, idprocess, idelement } = useParams();
 
@@ -56,58 +55,64 @@ function FinalStep(params) {
     return (
         <React.Fragment>
             <hr />
-            <div className="row">
-                <div className="col-md-4 d-flex justify-content-center align-items-center">
-                    <i class="bi bi-terminal me-2"></i>
-                    <span>Processes :</span>
-                    <Select className="w-50 px-2" options={processes} value={
-                        processes.filter(option =>
-                            option.value === idprocess)
-                    } />
-                </div>
-                <div className="col-md-4 d-flex justify-content-center align-items-center">
-                    <span>Sub-Processes :</span>
-                    <Select className="w-50 px-2" options={subprocesses} value={
-                        subprocesses.filter(option =>
-                            option.value === idsub)
-                    } />
-                </div>
-                <div className="col-md-4 d-flex justify-content-center align-items-center">
-                    <span>Elements :</span>
-                    <Select className="w-50 px-2" options={elements} value={
-                        elements.filter(option =>
-                            option.value === idelement)
-                    } />
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-4 d-flex justify-content-center align-items-center">
+                        <i class="bi bi-terminal me-2"></i>
+                        <span>Processes :</span>
+                        <Select className="w-50 px-2" options={processes} value={
+                            processes.filter(option =>
+                                option.value === idprocess)
+                        } />
+                    </div>
+                    <div className="col-md-4 d-flex justify-content-center align-items-center">
+                        <span>Sub-Processes :</span>
+                        <Select className="w-50 px-2" options={subprocesses} value={
+                            subprocesses.filter(option =>
+                                option.value === idsub)
+                        } />
+                    </div>
+                    <div className="col-md-4 d-flex justify-content-center align-items-center">
+                        <span>Elements :</span>
+                        <Select className="w-50 px-2" options={elements} value={
+                            elements.filter(option =>
+                                option.value === idelement)
+                        } />
+                    </div>
                 </div>
             </div>
             <hr />
 
-            <table align="center" style={{ borderCollapse: 'separate', borderSpacing: ' 0 20px' }}>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Indiactor Name</th>
-                        <th>Goal Value</th>
-                        <th>Achieved</th>
-                        <th>status</th>
-                        <th>Effectivness</th>
-                        <th>Efficency</th>
-                        <th>Trend</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {indicators.map((indicator, index) => (
-                        <tr key={indicator._id}>
-                            <td><span className="p-2">{index + 1}</span></td>
-                            <td style={{ maxWidth: '250px' }}>{indicator.indicator_name}</td>
-                            <td>{indicator.goal}</td>
-                            <td>{indicator.achieved}</td>
-                            {!indicator.is_max ? ((indicator.achieved - indicator.goal) * (-1) >= 0 ? checked() : notchecked()) : ((indicator.achieved - indicator.goal) >= 0 ? checked() : notchecked())}
-                            <td></td>
+            <div className="container-fluid  border p-5 border">
+                <table className="table" align="center">
+                    <thead>
+                        <tr className="table-primary">
+                            <th>#</th>
+                            <th>Indiactor Name</th>
+                            <th>Goal Value</th>
+                            <th>Achieved</th>
+                            <th>status</th>
+                            <th>Effectivness</th>
+                            <th>Efficency</th>
+                            <th>Trend</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {indicators.map((indicator, index) => (
+                            <tr key={indicator._id}>
+                                <td><span className="p-2">{index + 1}</span></td>
+                                <td style={{ maxWidth: '250px' }}>{indicator.indicator_name}</td>
+                                <td>{indicator.goal}</td>
+                                <td>{indicator.achieved}</td>
+                                {!indicator.is_max ? ((indicator.achieved - indicator.goal) * (-1) >= 0 ? checked() : notchecked()) : ((indicator.achieved - indicator.goal) >= 0 ? checked() : notchecked())}
+                                <td></td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+
+
 
         </React.Fragment>
     )
