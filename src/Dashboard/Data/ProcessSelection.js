@@ -17,7 +17,7 @@ function ProcessSelection() {
     useEffect(() => {
 
         //calling process api to get all processes from backend 
-        instance.get('process')
+        instance.get('process/getprocessesbycurrentperiod')
             .then(response => {
                 setProcesses(response.data.data);
                 console.log(response.data.data)
